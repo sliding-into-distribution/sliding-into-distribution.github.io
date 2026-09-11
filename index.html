@@ -1,183 +1,237 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="description"
-    content="SID: Sliding into Distribution for Robust Few-Demonstration Manipulation">
+  <meta name="description" content="SID: Sliding into Distribution for Robust Few-Demonstration Manipulation. Accepted to Robotics: Science and Systems (RSS) 2026.">
+  <meta name="keywords" content="robot learning, robotic manipulation, few-shot learning, imitation learning, out-of-distribution generalization, RSS 2026">
+  <meta name="author" content="Yicheng Ma, Wei Yu, Zhian Su, Xidan Zhang, Huixu Dong">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SID: Sliding into Distribution for Robust Few-Demonstration Manipulation</title>
+  <meta name="theme-color" content="#f7f7f3">
+  <meta property="og:title" content="SID: Sliding into Distribution">
+  <meta property="og:description" content="Robust few-demonstration manipulation through online distribution recovery. Accepted to RSS 2026.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sliding-into-distribution.github.io/">
+  <meta property="og:image" content="https://sliding-into-distribution.github.io/static/images/fig1.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://sliding-into-distribution.github.io/">
+  <title>SID — Sliding into Distribution | RSS 2026</title>
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-
-    gtag('js', new Date());
-
-    gtag('config', 'G-PYVRSFMDRL');
-  </script>
-
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-  <!-- <link rel="stylesheet" href="./static/css/fontawesome.all.min.css"> -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js"></script>
+  <script defer src="./static/js/index.js"></script>
 </head>
-
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="site-nav" aria-label="Primary navigation">
+    <div class="nav-inner">
+      <a class="wordmark" href="#top" aria-label="SID home"><span class="wordmark-mark" aria-hidden="true">S</span><span>SID</span></a>
+      <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links"><span></span><span></span></button>
+      <div class="nav-links" id="nav-links">
+        <a href="#overview">Overview</a><a href="#method">Method</a><a href="#experiments">Experiments</a><a href="#discussion">Discussion</a><a href="#citation">Citation</a>
+      </div>
+    </div>
+  </nav>
 
-  <!-- <nav class="navbar" role="navigation" aria-label="main navigation"> -->
-  <!-- <div class="navbar-brand"> -->
-  <!-- <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"> -->
-  <!-- <span aria-hidden="true"></span> -->
-  <!-- <span aria-hidden="true"></span> -->
-  <!-- <span aria-hidden="true"></span> -->
-  <!-- </a> -->
-  <!-- </div> -->
-  <!-- <div class="navbar-menu"> -->
-  <!-- <div class="navbar-start" style="flex-grow: 1; justify-content: center;"> -->
-  <!-- <a class="navbar-item" href="https://github.com/thu-ml/"> -->
-  <!-- <span class="icon"> -->
-  <!-- <i class="fas fa-home"></i> -->
-  <!-- </span> -->
-  <!-- </a> -->
+  <main id="main-content">
+    <header class="hero-section" id="top">
+      <div class="page-shell hero-grid">
+        <div class="hero-copy">
+          <div class="venue-pill"><span class="venue-dot" aria-hidden="true"></span>Accepted to <strong>Robotics: Science and Systems 2026</strong></div>
+          <h1><span>SID:</span> Sliding into Distribution for Robust Few-Demonstration Manipulation</h1>
+          <p class="hero-deck">Recover online. Execute with confidence. Realign when needed.</p>
+          <div class="authors" aria-label="Paper authors">
+            <span>Yicheng Ma<sup>1,2,*</sup></span><span>Wei Yu<sup>1,2,*</sup></span><span>Zhian Su<sup>1,2</sup></span><span>Xidan Zhang<sup>1,2</sup></span><span>Huixu Dong<sup>1,2,†</sup></span>
+          </div>
+          <div class="affiliations"><span><sup>1</sup> Grasp Lab, Zhejiang University</span><span><sup>2</sup> Torch Kernel Co., Ltd.</span></div>
+          <p class="author-note"><sup>*</sup> Equal contribution &nbsp;·&nbsp; <sup>†</sup> Corresponding author</p>
+          <div class="publication-links" aria-label="Paper resources">
+            <a href="https://arxiv.org/pdf/2605.13428" class="paper-button primary-button"><i class="fas fa-file-pdf" aria-hidden="true"></i><span>Paper</span></a>
+            <a href="https://arxiv.org/abs/2605.13428" class="paper-button"><i class="ai ai-arxiv" aria-hidden="true"></i><span>arXiv</span></a>
+            <a href="https://sliding-into-distribution.github.io/" class="paper-button"><i class="fab fa-github" aria-hidden="true"></i><span>Code</span></a>
+          </div>
+        </div>
+        <aside class="hero-metrics" aria-label="Key results">
+          <div class="metric-card metric-card-accent"><span class="metric-value">≈90%</span><span class="metric-label">closed-loop OOD success rate</span></div>
+          <div class="metric-card"><span class="metric-value">2</span><span class="metric-label">demonstrations per task</span></div>
+          <div class="metric-card"><span class="metric-value">6</span><span class="metric-label">real-world tasks</span></div>
+        </aside>
+      </div>
+    </header>
 
-  <!-- </div> -->
-  <!-- </nav> -->
+    <section class="teaser-section" aria-labelledby="teaser-heading">
+      <div class="page-shell">
+        <figure class="paper-figure hero-figure">
+          <img src="./static/images/fig1.png" alt="SID motion field sliding out-of-distribution robot states toward the in-distribution region before an execution policy performs manipulation">
+          <figcaption id="teaser-heading"><strong>Recover, execute, and realign.</strong> An object-centric motion field moves out-of-distribution states toward demonstrated support; closed-loop SID continues to monitor drift and recover online when needed.</figcaption>
+        </figure>
+      </div>
+    </section>
 
+    <section class="section-block" id="overview">
+      <div class="page-shell narrow-shell">
+        <div class="section-heading centered-heading"><span class="section-index">01 · Overview</span><h2>Distribution shift is a control problem</h2></div>
+        <div class="abstract-copy">
+          <p>Generalizing robotic manipulation across object poses, viewpoints, and dynamic disturbances is difficult—especially with only a few demonstrations. End-to-end visuomotor policies are expressive but data-hungry, while planning and optimization do not directly capture the interaction strategies demonstrated by humans.</p>
+          <p>We propose <strong>Sliding into Distribution (SID)</strong>, a structured framework that learns an object-centric motion field from canonicalized demonstrations. The field iteratively slides the system toward the demonstrated manifold and into the reliable operating region of a lightweight egocentric execution policy. In the closed-loop variant, an auxiliary confidence signal monitors distribution drift online and routes the robot back to field-based realignment when needed.</p>
+          <p>Across six real-world tasks, SID achieves approximately <strong>90% success under OOD initializations using only two demonstrations</strong>, while maintaining robustness to distractors and external disturbances.</p>
+        </div>
+        <div class="contribution-strip" aria-label="Main contributions">
+          <article><span>01</span><h3>Online recovery</h3><p>Continuously brings unseen or drifted states back toward demonstrated support instead of asking the policy to extrapolate.</p></article>
+          <article><span>02</span><h3>Consistent augmentation</h3><p>Reprojects point clouds and actions together, preserving their geometric and kinematic relationship.</p></article>
+          <article><span>03</span><h3>Closed-loop routing</h3><p>Uses ID confidence to switch between execution, field-based realignment, and recovery as conditions change.</p></article>
+        </div>
+      </div>
+    </section>
 
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column has-text-centered">
-            <h1 class="title is-2 publication-title">SID: Sliding into Distribution for Robust Few-Demonstration Manipulation</h1>
-            <div class="container">
-              <div class="columns is-centered">
-                <div class="column is-10">
-                  <div class="is-size-5 publication-authors has-text-centered">
-                    <span class="author-block">
-                      <!-- <a href="https://yichatani.github.io/">Yicheng Ma</a>, -->
-                      Yicheng Ma*,
-                    </span>
-                    <span class="author-block">
-                      Wei Yu*,
-                    </span>
-                    <span class="author-block">
-                      Zhian Su,
-                    </span>
-                    <span class="author-block">
-                      Xidan Zhang,
-                    </span>
-                    <span class="author-block">
-                      Huixu Dong&dagger;
-                    </span>
-                  </div>
-                </div>
+    <section class="section-block tinted-section" id="method">
+      <div class="page-shell">
+        <div class="section-heading split-heading">
+          <div><span class="section-index">02 · Method</span><h2>A closed-loop path back in distribution</h2></div>
+          <p>SID separates global alignment from local interaction, then reconnects them through confidence-aware online recovery.</p>
+        </div>
+        <figure class="paper-figure method-figure">
+          <img src="./static/images/fig2.png" alt="SID architecture with an object-centric motion field, egocentric point-cloud data augmentation, and an egocentric execution policy" loading="lazy" decoding="async">
+          <figcaption><strong>SID overview.</strong> The motion field predicts object-centric sliding steps; reprojection produces kinematically consistent ID and OOD samples; the execution policy predicts actions and ID confidence from egocentric point clouds.</figcaption>
+        </figure>
+        <div class="method-cards">
+          <article class="method-card"><span class="method-number">A</span><h3>Object-centric motion field</h3><p>A smooth descent field over canonicalized SE(3) approach states supplies large corrections far from the demonstrations and naturally vanishes near the demonstrated manifold.</p><p class="method-tag">OOD → ID alignment</p></article>
+          <article class="method-card"><span class="method-number">B</span><h3>Egocentric augmentation</h3><p>Hand–eye-calibrated point-cloud reprojection perturbs viewpoints while updating relative actions consistently, creating valid ID training examples and explicit OOD negatives.</p><p class="method-tag">Geometric consistency</p></article>
+          <article class="method-card"><span class="method-number">C</span><h3>Confidence-aware execution</h3><p>A lightweight flow-matching policy handles precise manipulation, while an auxiliary ID-confidence head detects drift and enables closed-loop realignment.</p><p class="method-tag">Closed-loop recovery</p></article>
+        </div>
+        <div class="method-detail-grid">
+          <figure class="paper-figure detail-figure"><img src="./static/images/fig4.png" alt="Object-centric representation space anchored by a common SE(3) object pose" loading="lazy" decoding="async"><figcaption><strong>Representation space.</strong> Segmented images, point clouds, or object poses can share a common SE(3) anchor for pose-aligned distance computation.</figcaption></figure>
+          <div class="detail-copy"><span class="detail-label">Object-centric representation</span><h3>A shared anchor across modalities</h3><p>SID defines an object-centric representation space anchored by a target pose in SE(3). Segmented images, point clouds, and explicit object poses can therefore be compared through the same pose-aligned geometry.</p><p>In our implementation, the target-object pose is estimated in the wrist-camera frame. Canonicalizing demonstrations around this anchor suppresses scene- and camera-specific variation, giving the motion field a consistent space in which to learn corrective steps.</p></div>
+        </div>
+        <div class="inference-intro"><span class="detail-label">From alignment to execution</span><h3>Closed-loop recovery beyond the first handoff</h3><p>SID-open performs a single field-to-policy handoff. SID-closed instead keeps monitoring the policy’s operating region and can route control back to realignment or recovery throughout execution.</p></div>
+        <figure class="paper-figure inference-figure"><img src="./static/images/fig3.png" alt="Open-loop and closed-loop SID inference pipelines" loading="lazy" decoding="async"><figcaption><strong>Two inference modes.</strong> SID-open hands off to the execution policy once the field norm is low. SID-closed additionally monitors ID and pose confidence, routing drifted states back to field alignment or recovery.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="section-block" id="experiments">
+      <div class="page-shell">
+        <div class="section-heading split-heading">
+          <div><span class="section-index">03 · Experiments</span><h2>Robust with two demonstrations</h2></div>
+          <p>All success rates are measured over 50 real-world trials per task. SID uses 2 raw demonstrations; trainable baselines use 100.</p>
+        </div>
+        <div class="result-layout">
+          <div class="result-callout"><span class="result-big">89.7%</span><p>average OOD success for <strong>SID-closed</strong> across six tasks</p><span class="result-foot">+25.7 points over MT3 on average</span></div>
+          <div class="table-wrap">
+            <table>
+              <caption>Static evaluation under OOD initializations</caption>
+              <thead><tr><th scope="col">Task</th><th scope="col">Best baseline</th><th scope="col">SID-open</th><th scope="col">SID-closed</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Open Drawer</th><td>76</td><td>90</td><td class="best">92</td></tr>
+                <tr><th scope="row">Pour Water</th><td>78</td><td>86</td><td class="best">90</td></tr>
+                <tr><th scope="row">Hang Tape</th><td>46</td><td>82</td><td class="best">88</td></tr>
+                <tr><th scope="row">Hang Cup</th><td>74</td><td>86</td><td class="best">90</td></tr>
+                <tr><th scope="row">PnP-Box</th><td>58</td><td>84</td><td class="best">92</td></tr>
+                <tr><th scope="row">Multi-PnP-Box</th><td>52</td><td>82</td><td class="best">86</td></tr>
+              </tbody>
+            </table>
+            <p class="table-note">Success rate (%). “Best baseline” is the strongest non-SID result for each task.</p>
+          </div>
+        </div>
+
+        <div class="video-group">
+          <div class="video-group-heading"><span class="video-group-number">01</span><div><h3>Workspace-wide OOD generalization</h3><p>SID recovers from varied object poses and wrist-camera viewpoints before executing each task.</p></div></div>
+          <div class="video-grid video-grid-three">
+            <article class="video-card"><video controls muted playsinline preload="metadata" aria-label="Open drawer under OOD initialization"><source src="./static/videos/OOD_Open_Drawer-1.mp4" type="video/mp4"></video><div class="video-caption"><span>OOD</span><h4>Open Drawer</h4></div></article>
+            <article class="video-card"><video controls muted playsinline preload="metadata" aria-label="Pour water under OOD initialization"><source src="./static/videos/OOD_Pour_Water-1.mp4" type="video/mp4"></video><div class="video-caption"><span>OOD</span><h4>Pour Water</h4></div></article>
+            <article class="video-card"><video controls muted playsinline preload="metadata" aria-label="Hang tape under OOD initialization"><source src="./static/videos/OOD_Hang_Tape-1.mp4" type="video/mp4"></video><div class="video-caption"><span>OOD</span><h4>Hang Tape</h4></div></article>
+            <article class="video-card"><video controls muted playsinline preload="metadata" aria-label="Hang cup under OOD initialization"><source src="./static/videos/OOD_Hang_Cup-1.mp4" type="video/mp4"></video><div class="video-caption"><span>OOD</span><h4>Hang Cup</h4></div></article>
+            <article class="video-card"><video controls muted playsinline preload="metadata" aria-label="Pick and place under OOD initialization"><source src="./static/videos/OOD_PnP-1.mp4" type="video/mp4"></video><div class="video-caption"><span>OOD</span><h4>Pick &amp; Place</h4></div></article>
+            <article class="video-card"><video controls muted playsinline preload="metadata" aria-label="Multi-object pick and place under OOD initialization"><source src="./static/videos/OOD_Multi_PnP-1.mp4" type="video/mp4"></video><div class="video-caption"><span>OOD · Long horizon</span><h4>Multi-object PnP</h4></div></article>
+          </div>
+        </div>
+
+        <div class="video-group">
+          <div class="video-group-heading"><span class="video-group-number">02</span><div><h3>Distractors and external disturbances</h3><p>Target-centric perception filters clutter, while closed-loop confidence detects execution drift and triggers realignment.</p></div></div>
+          <div class="robustness-results">
+            <article class="robustness-card">
+              <div class="robustness-card-heading"><div><span>Table II</span><h4>External disturbances</h4></div><p>50 trials / task</p></div>
+              <div class="compact-table-wrap">
+                <table class="compact-table">
+                  <thead><tr><th scope="col">Task</th><th scope="col">Best baseline</th><th scope="col">SID-O</th><th scope="col">SID-C</th></tr></thead>
+                  <tbody>
+                    <tr><th scope="row">Hang Tape</th><td>80</td><td>44</td><td class="best">84</td></tr>
+                    <tr><th scope="row">Hang Cup</th><td>68</td><td>36</td><td class="best">88</td></tr>
+                    <tr><th scope="row">PnP-Box</th><td>74</td><td>52</td><td class="best">86</td></tr>
+                    <tr><th scope="row">Pour Water</th><td>78</td><td>40</td><td class="best">82</td></tr>
+                  </tbody>
+                </table>
               </div>
-            </div>
-            <div class="is-size-5 publication-authors">
-              <span class="author-block">Grasp Lab, Zhejiang University<br>
-            </div>
-            <div class="is-size-5 publication-authors">
-              <span class="author-block">* Equal contribution, &dagger; Corresponding author<br>
-            </div>
-
-            <div class="column has-text-centered">
-              <div class="publication-links">
-                <!-- PDF Link. -->
-                <span class="link-block">
-                  <a href="https://arxiv.org/pdf/2605.13428" class="external-link button is-normal is-rounded is-dark">
-                  <!-- <a class="external-link button is-normal is-rounded is-dark"> -->
-                    <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                    </span>
-                    <span>Paper</span>
-                  </a>
-                </span>
-                <span class="link-block">
-                  <a href="https://arxiv.org/abs/2605.13428" class="external-link button is-normal is-rounded is-dark">
-                  <!-- <a class="external-link button is-normal is-rounded is-dark"> -->
-                    <span class="icon">
-                      <i class="ai ai-arxiv"></i>
-                    </span>
-                    <span>arXiv</span>
-                  </a>
-                </span>
-                <!-- Code Link. -->
-                <span class="link-block">
-                  <a href="https://sliding-into-distribution.github.io/" class="external-link button is-normal is-rounded is-dark">
-                  <!-- <a class="external-link button is-normal is-rounded is-dark"> -->
-                    <span class="icon">
-                      <i class="fab fa-github"></i>
-                    </span>
-                    <span>Code</span>
-                  </a>
-                </span>
-                <!-- Dataset Link. -->
-                <!-- Model Link. -->                                    
+              <p class="robustness-summary"><strong>85.0%</strong> average success for SID-closed, compared with 75.0% for the strongest baseline.</p>
+            </article>
+            <article class="robustness-card">
+              <div class="robustness-card-heading"><div><span>Table III</span><h4>Distractor objects</h4></div><p>50 trials / task</p></div>
+              <div class="compact-table-wrap">
+                <table class="compact-table">
+                  <thead><tr><th scope="col">Task</th><th scope="col">Best baseline</th><th scope="col">SID-O</th><th scope="col">SID-C</th></tr></thead>
+                  <tbody>
+                    <tr><th scope="row">Hang Cup</th><td>72</td><td>86</td><td class="best">88</td></tr>
+                    <tr><th scope="row">PnP-Box</th><td>74</td><td>84</td><td class="best">90</td></tr>
+                  </tbody>
+                </table>
               </div>
-            </div>
+              <p class="robustness-summary"><strong>89.0%</strong> average success for SID-closed, with less than a 10% drop from the corresponding static OOD setting.</p>
+            </article>
+          </div>
+          <p class="robustness-note">Success rate (%). “Best baseline” reports the strongest non-SID method for each task. SID-O and SID-C denote SID-open and SID-closed.</p>
+          <div class="video-grid video-grid-two">
+            <article class="video-card featured-video"><video controls muted playsinline preload="metadata" aria-label="Evaluation with distractor objects"><source src="./static/videos/Distractor_Eval-1.mp4" type="video/mp4"></video><div class="video-caption"><span>Clutter robustness</span><h4>Distractor Evaluation</h4></div></article>
+            <article class="video-card featured-video"><video controls muted playsinline preload="metadata" aria-label="Evaluation under external disturbances"><source src="./static/videos/Disturbance_Eval-1.mp4" type="video/mp4"></video><div class="video-caption"><span>Dynamic robustness</span><h4>Disturbance Evaluation</h4></div></article>
+          </div>
+        </div>
+
+        <div class="video-group">
+          <div class="video-group-heading"><span class="video-group-number">03</span><div><h3>Long-horizon reuse and recomposition</h3><p>Lightweight SID skills can be loaded together and invoked stage by stage—without retraining an end-to-end policy.</p></div></div>
+          <div class="video-grid video-grid-two">
+            <article class="video-card featured-video"><video controls muted playsinline preload="metadata" aria-label="Extended experiment making coffee"><source src="./static/videos/Extended_Exp_Make_Coffee-1.mp4" type="video/mp4"></video><div class="video-caption"><span>Extended experiment</span><h4>Make Coffee</h4></div></article>
+            <article class="video-card featured-video"><video controls muted playsinline preload="metadata" aria-label="Task recomposition evaluation"><source src="./static/videos/Task_Recomposition_Eval-1.mp4" type="video/mp4"></video><div class="video-caption"><span>Skill composition</span><h4>Task Recomposition</h4></div></article>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- <section class="hero teaser">
-    <div class="container is-max-desktop">
-      <div class="hero-body" style="display: flex; justify-content: center; align-items: center;">
-        <video style="width:100%; height:auto; margin: 0%;" controls muted loading="lazy" autoplay loop playsinline>
-          <source src="./static/videos/" type="video/mp4">
-        </video>
+    <section class="section-block discussion-section" id="discussion">
+      <div class="page-shell">
+        <div class="section-heading split-heading">
+          <div><span class="section-index">04 · Discussion</span><h2>Why online recovery matters</h2></div>
+          <p>SID treats distribution shift as a control signal: detect it, realign online, and resume execution inside the policy’s reliable region.</p>
+        </div>
+        <div class="discussion-highlight">
+          <span class="detail-label">Takeaway</span>
+          <p>The experiments suggest that few-demonstration robustness comes not only from a stronger execution policy, but from actively recovering its operating distribution. Closed-loop confidence-aware routing is especially important under disturbances, where the robot may need to realign more than once.</p>
+        </div>
+        <p class="discussion-outlook"><strong>Scope and outlook.</strong> The current system still assumes reliable object-centric perception and a visible, reachable approach region. Future work can make recovery more object-agnostic and obstacle-aware.</p>
       </div>
-    </div>
-    </div>
-  </section> -->
+    </section>
 
-
-
-  <section class="section">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column is-full">
-          <h2 class="title is-3 has-text-centered">Abstract</h2>
-          <div style="display: flex; justify-content: center;">
-            <div style="display: flex; justify-content: center;">
-              <!-- convert -density 300 ./static/images/fig1.pdf ./static/images/fig1.png -->
-              <img src="./static/images/fig1.png" alt="Abstract image" style="max-width: 60%; height: auto; margin: 10px;">
-            </div>
-          </div>
-          <p style="text-align: justify;">
-            We propose <b>Sliding into Distribution (SID)</b>, a structured framework that learns an object-centric motion field from canonicalized demonstrations to iteratively slide the system toward the demonstrated manifold and into the reliable operating region of a lightweight egocentric execution policy, mitigating <b>out-of-distribution (OOD)</b> execution. 
-            The motion field provides large corrective motions when far from the demonstration manifold and naturally vanishes near convergence, enabling robust reaching under substantial pose and viewpoint shifts. 
-            Within the reached regime, an egocentric policy trained with conditioned flow matching performs task-specific manipulation, supported by kinematically consistent point-cloud reprojection augmentation that preserves action--observation consistency. 
-            Across six real-world tasks, SID achieves approximately 90% success under OOD initializations with only two demonstrations, with under a 10% drop under distractors and external disturbances. 
-            Overall, SID provides a new paradigm for few-shot manipulation: explicitly managing distribution shift via online distribution recovery.
-          </p>
+    <section class="section-block citation-section" id="citation">
+      <div class="page-shell citation-grid">
+        <div class="section-heading"><span class="section-index">05 · Citation</span><h2>Cite SID</h2><p>If you find this work useful, please consider citing our paper.</p><div class="rss-stamp" aria-label="Accepted to RSS 2026"><span>Accepted to</span><strong>RSS 2026</strong></div></div>
+        <div class="bibtex-card">
+          <div class="bibtex-header"><span>BibTeX</span><button class="copy-button" type="button" data-copy-target="bibtex-code"><i class="far fa-copy" aria-hidden="true"></i><span>Copy</span></button></div>
+          <pre id="bibtex-code"><code>@misc{ma2026sidslidingdistributionrobust,
+  title         = {SID: Sliding into Distribution for Robust
+                   Few-Demonstration Manipulation},
+  author        = {Yicheng Ma and Wei Yu and Zhian Su and
+                   Xidan Zhang and Huixu Dong},
+  year          = {2026},
+  eprint        = {2605.13428},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.RO},
+  url           = {https://arxiv.org/abs/2605.13428}
+}</code></pre>
         </div>
       </div>
-    </div>
-    <!--/ Abstract. -->
-  </section>
-
-<!-- To be continued -->
-
-
+    </section>
+  </main>
+  <footer class="site-footer"><div class="page-shell footer-inner"><div><strong>SID</strong><span>Sliding into Distribution</span></div><p>Accepted to Robotics: Science and Systems 2026.</p></div></footer>
 </body>
-
 </html>
